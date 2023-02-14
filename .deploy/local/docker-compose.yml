@@ -1,0 +1,17 @@
+services:
+  backend:
+    image: be-node-test
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:9229:9229"
+    user: ${USER_UID:?}:${USER_GID:?}
+    stop_signal: SIGINT
+    environment:
+      npm_config_script_shell: "bash"
+      npm_config_update_notifier: "false"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: develop
